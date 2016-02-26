@@ -1,0 +1,6 @@
+D:\SourceTree\TicTac\TicTac\TicTac\bin\x86\Debug\TicTac.exe
+D:\SourceTree\TicTac\TicTac\TicTac\bin\x86\Debug\TicTac.pdb
+D:\SourceTree\TicTac\TicTac\TicTac\obj\x86\Debug\TicTac.csprojResolveAssemblyReference.cache
+D:\SourceTree\TicTac\TicTac\TicTac\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\SourceTree\TicTac\TicTac\TicTac\obj\x86\Debug\TicTac.exe
+D:\SourceTree\TicTac\TicTac\TicTac\obj\x86\Debug\TicTac.pdb
