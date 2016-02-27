@@ -18,6 +18,10 @@ namespace TicTac
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public static Texture2D boardTexture;
+        TurnManager turnManager;
+        Board board;
+        
 
         public Game1()
         {
@@ -37,6 +41,9 @@ namespace TicTac
             graphics.PreferredBackBufferWidth = Globals.windowX;
             graphics.PreferredBackBufferHeight = Globals.windowY;
             graphics.ApplyChanges();
+
+            this.IsMouseVisible = true;
+
             base.Initialize();
         }
 
@@ -48,7 +55,9 @@ namespace TicTac
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            boardTexture = Content.Load<Texture2D>("board");
+            board = new Board(15, 15);
+            turnManager = new TurnManager(board);
             // TODO: use this.Content to load your game content here
         }
 
@@ -68,10 +77,13 @@ namespace TicTac
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyMouseReader.Update();
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            turnManager.Update(gameTime);
+            board.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -83,7 +95,12 @@ namespace TicTac
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
+
+            spriteBatch.Begin();
+
+            board.Draw(spriteBatch);
+            spriteBatch.End();
 
             // TODO: Add your drawing code here
 

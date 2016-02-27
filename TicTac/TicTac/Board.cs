@@ -9,10 +9,10 @@ namespace TicTac
 {
     class Board
     {
-        int width;
-        int height;
+        public int width { get; private set; }
+        public int height { get; private set; }
         public Tile[] tiles { get; private set; }
-        List<int> filledIndex;
+        public Dictionary<Tuple<int, int>, Tile> filledTiles { get; private set; }
 
         public Board(int width, int height)
         {
@@ -20,17 +20,38 @@ namespace TicTac
             this.height = height;
 
             tiles = new Tile[width * height];
-            filledIndex = new List<int>();
+            filledTiles = new Dictionary<Tuple<int, int>, Tile>();
+
+            ResetBoard();
+
         }
 
         public void ResetBoard()
         {
-            for (int i = 0; i < tiles.Length; i++)
+            for (int i = 0; i < height; i++)
             {
-                tiles[i] = new Tile();
+                for (int j = 0; j < width; j++)
+                {
+                    tiles[i*width + j] = new Tile(j, i);
+                }
             }
 
-            filledIndex.Clear();
+            filledTiles.Clear();
+        }
+
+        public int toIndex(int xPos, int yPos)
+        {
+            return yPos * width + xPos;
+        }
+
+        public Point toPoint(int index)
+        {
+            return new Point(index % width, index / width);
+        }
+
+        public Tuple<int, int> toTuple(int index)
+        {
+            return Tuple.Create<int, int>(index % width, index / width);
         }
 
         public void Update(GameTime gameTime)
@@ -40,15 +61,26 @@ namespace TicTac
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                tiles[i].Draw(spriteBatch);
+            }
 
         }
+
+        public bool IsTileEmpty(int index)
+        {
+            return (tiles[index].tileState == TileState.none);
+                    
+        }
+
 
         public void ChangeTile(int index, TileState newState)
         {
             if (tiles[index].tileState == TileState.none)
             {
                 tiles[index].tileState = newState;
-                filledIndex.Add(index);
+                filledTiles.Add(toTuple(index), tiles[index]);
             }
             else
             {
