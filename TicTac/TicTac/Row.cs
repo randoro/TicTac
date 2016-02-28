@@ -8,8 +8,8 @@ namespace TicTac
 {
     class Row
     {
-        Point emptyTile1;
-        Point emptyTile2;
+        public Point emptyTile1 { get; private set; }
+        public Point emptyTile2 { get; private set; }
         Tile[] tiles;
         int length;
 
