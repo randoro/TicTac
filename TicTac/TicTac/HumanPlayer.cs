@@ -30,8 +30,19 @@ namespace TicTac
                     int index = ExactTile.Y * board.width + ExactTile.X;
                     if (board.IsTileEmpty(index))
                     {
-                        board.ChangeTile(index, playersOwnState);
-                        return true;
+                        if (board.HasAnyNeighbour(ExactTile))
+                        {
+                            board.ChangeTile(index, playersOwnState);
+                            return true;
+                        }
+                        else
+                        {
+                            if (board.filledTiles.Count == 0)
+                            {
+                                board.ChangeTile(index, playersOwnState);
+                                return true;
+                            }
+                        }
                     }
 
                 }

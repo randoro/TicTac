@@ -11,8 +11,8 @@ namespace TicTac
 
     public class Tile
     {
-        int Xpos;
-        int Ypos;
+        public int Xpos { get; private set; }
+        public int Ypos { get; private set; }
         public TileState tileState { get; set; }
 
         public Tile(int Xpos, int Ypos)

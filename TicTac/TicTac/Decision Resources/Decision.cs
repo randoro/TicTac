@@ -35,7 +35,7 @@ namespace TicTac
         {
             if (trueCalc != null)
             {
-                ((DecisionOrAction)trueCalc).printTree(true, indent + (isRight ? "        " : " |      "));
+                ((DecisionOrAction)trueCalc).printTree(true, indent + (isRight ? "        " : "       |      "));
             }
             Console.Write(indent);
             if (isRight)
@@ -50,7 +50,7 @@ namespace TicTac
             printNodeValue();
             if (falseCalc != null)
             {
-                ((DecisionOrAction)falseCalc).printTree(false, indent + (isRight ? " |      " : "        "));
+                ((DecisionOrAction)falseCalc).printTree(false, indent + (isRight ? "       |      " : "        "));
             }
         }
 

@@ -88,6 +88,159 @@ namespace TicTac
             }
         }
 
+        public bool HasAnyNeighbour(Point exactPos)
+        {
+            //minus Y
+            if(filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X - 1, exactPos.Y - 1)))
+            {
+                return true;
+            }
+            if (filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X, exactPos.Y - 1)))
+            {
+                return true;
+            }
+            if (filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X + 1, exactPos.Y - 1)))
+            {
+                return true;
+            }
+
+            //same Y
+            if (filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X - 1, exactPos.Y)))
+            {
+                return true;
+            }
+            if (filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X + 1, exactPos.Y)))
+            {
+                return true;
+            }
+
+
+            //plus Y
+            if (filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X - 1, exactPos.Y + 1)))
+            {
+                return true;
+            }
+            if (filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X, exactPos.Y + 1)))
+            {
+                return true;
+            }
+            if (filledTiles.ContainsKey(Tuple.Create<int, int>(exactPos.X + 1, exactPos.Y + 1)))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
+        public int HasEmptyNeighbour(Point exactPos)
+        {
+            int emptyNeighbour = 0;
+            //minus Y
+            Point tempPoint0 = new Point(exactPos.X - 1, exactPos.Y - 1);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint0.X, tempPoint0.Y)))
+            {
+                if (tempPoint0.X >= 0 && tempPoint0.X < width && tempPoint0.Y >= 0 && tempPoint0.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+            Point tempPoint1 = new Point(exactPos.X, exactPos.Y - 1);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint1.X, tempPoint1.Y)))
+            {
+                if (tempPoint1.X >= 0 && tempPoint1.X < width && tempPoint1.Y >= 0 && tempPoint1.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+            Point tempPoint2 = new Point(exactPos.X + 1, exactPos.Y - 1);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint2.X, tempPoint2.Y)))
+            {
+                if (tempPoint2.X >= 0 && tempPoint2.X < width && tempPoint2.Y >= 0 && tempPoint2.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+            //same Y
+            Point tempPoint3 = new Point(exactPos.X - 1, exactPos.Y);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint3.X, tempPoint3.Y)))
+            {
+                if (tempPoint3.X >= 0 && tempPoint3.X < width && tempPoint3.Y >= 0 && tempPoint3.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+            Point tempPoint4 = new Point(exactPos.X + 1, exactPos.Y);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint4.X, tempPoint4.Y)))
+            {
+                if (tempPoint4.X >= 0 && tempPoint4.X < width && tempPoint4.Y >= 0 && tempPoint4.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+
+            //plus Y
+            Point tempPoint5 = new Point(exactPos.X - 1, exactPos.Y + 1);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint5.X, tempPoint5.Y)))
+            {
+                if (tempPoint5.X >= 0 && tempPoint5.X < width && tempPoint5.Y >= 0 && tempPoint5.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+            Point tempPoint6 = new Point(exactPos.X, exactPos.Y + 1);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint6.X, tempPoint6.Y)))
+            {
+                if (tempPoint6.X >= 0 && tempPoint6.X < width && tempPoint6.Y >= 0 && tempPoint6.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+            Point tempPoint7 = new Point(exactPos.X + 1, exactPos.Y + 1);
+            if (!filledTiles.ContainsKey(Tuple.Create<int, int>(tempPoint7.X, tempPoint7.Y)))
+            {
+                if (tempPoint7.X >= 0 && tempPoint7.X < width && tempPoint7.Y >= 0 && tempPoint7.Y < height)
+                {
+                    emptyNeighbour++;
+                }
+            }
+
+            return emptyNeighbour;
+        }
+
+
+        public bool RandomNeighbour(Point exactPos, ref Point neighbourPos)
+        {
+            int xAdd = Globals.rand.Next(-1, 2);
+            int yAdd = Globals.rand.Next(-1, 2);
+            Point newPoint = new Point(exactPos.X + xAdd, exactPos.Y + yAdd);
+            if (newPoint.X == exactPos.X && newPoint.Y == exactPos.Y)
+            {
+                return false;
+            }
+            else
+            {
+                if (newPoint.X >= 0 && newPoint.X < width && newPoint.Y >= 0 && newPoint.Y < height)
+                {
+                    neighbourPos = newPoint;
+                    return true;
+                }
+                return false;
+            }
+
+        }
+
+        public bool IsInsideBorder(Point exactPos)
+        {
+            return (exactPos.X >= 0 && exactPos.X < width && exactPos.Y >= 0 && exactPos.Y < height);
+        }
 
 
     }
