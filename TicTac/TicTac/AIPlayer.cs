@@ -42,22 +42,22 @@ namespace TicTac
             }
 
             //My 4 in a row
-            List<Row> localMy4Rows = GetInARowCombo(4, localfilledTiles, localMyTiles);
+            List<Row> localMy4Rows = GetInARowCombo(5, localfilledTiles, localMyTiles);
 
             //Enemy 4 in a row
-            List<Row> localEnemy4Rows = GetInARowCombo(4, localfilledTiles, localEnemyTiles);
+            List<Row> localEnemy4Rows = GetInARowCombo(5, localfilledTiles, localEnemyTiles);
 
             //My 3 in a row
-            List<Row> localMy3Rows = GetInARowCombo(3, localfilledTiles, localMyTiles);
+            List<Row> localMy3Rows = GetInARowCombo(4, localfilledTiles, localMyTiles);
 
             //Enemy 3 in a row
-            List<Row> localEnemy3Rows = GetInARowCombo(3, localfilledTiles, localEnemyTiles);
+            List<Row> localEnemy3Rows = GetInARowCombo(4, localfilledTiles, localEnemyTiles);
 
             //My 2 in a row
-            List<Row> localMy2Rows = GetInARowCombo(2, localfilledTiles, localMyTiles);
+            List<Row> localMy2Rows = GetInARowCombo(3, localfilledTiles, localMyTiles);
 
             //Enemy 2 in a row
-            List<Row> localEnemy2Rows = GetInARowCombo(2, localfilledTiles, localEnemyTiles);
+            List<Row> localEnemy2Rows = GetInARowCombo(3, localfilledTiles, localEnemyTiles);
 
             Point tileToChange = tree.DoTurn(board, localfilledTiles, localMyTiles, localEnemyTiles, localMy4Rows, localEnemy4Rows, localMy3Rows, localEnemy3Rows, localMy2Rows, localEnemy2Rows);
             if (tileToChange.X != -1)
@@ -128,41 +128,57 @@ namespace TicTac
             Tile startsideTile;
             Point tempStartPoint = new Point(pos.X - direction.X, pos.Y - direction.Y);
             Point returnStartPoint = new Point(-1, -1);
-            if (!localfilledTiles.TryGetValue(Tuple.Create<int, int>(tempStartPoint.X, tempStartPoint.Y), out startsideTile))
+            int fullLength = 0; //problem?
+
+            if (board.IsInsideBorder(tempStartPoint))
             {
                 //check if inside grid fix
-                if (board.IsInsideBorder(tempStartPoint))
+
+                if (!localfilledTiles.TryGetValue(Tuple.Create<int, int>(tempStartPoint.X, tempStartPoint.Y), out startsideTile))
                 {
+
                     returnStartPoint = tempStartPoint;
+                }
+                else
+                {
+                    fullLength++;
                 }
             }
 
-            Tile[] tempArray = new Tile[comboLength];
+            Tile[] tempArray = new Tile[comboLength - 2];
 
-
-            int fullLength = 0; //problem?
-            for (int i = 0; i < comboLength; i++)
+            
+            for (int i = 0; i < comboLength - 2; i++)
             {
+
                 Tile tempTile;
                 if (localSearchTiles.TryGetValue(Tuple.Create<int, int>(pos.X, pos.Y), out tempTile))
                 {
                     tempArray[i] = tempTile;
                     fullLength++;
+
+                    pos.X = pos.X + direction.X;
+                    pos.Y = pos.Y + direction.Y;
                 }
 
-                pos.X = pos.X + direction.X;
-                pos.Y = pos.Y + direction.Y;
+                
+
+                
             }
 
             Tile endsideTile;
             Point tempEndPoint = new Point(pos.X, pos.Y);
             Point returnEndPoint = new Point(-1, -1);
-            if (!localfilledTiles.TryGetValue(Tuple.Create<int, int>(tempEndPoint.X, tempEndPoint.Y), out endsideTile))
+            if (board.IsInsideBorder(tempEndPoint))
             {
                 //check if inside grid fix
-                if (board.IsInsideBorder(tempEndPoint))
+                if (!localfilledTiles.TryGetValue(Tuple.Create<int, int>(tempEndPoint.X, tempEndPoint.Y), out endsideTile))
                 {
                     returnEndPoint = tempEndPoint;
+                }
+                else
+                {
+                    fullLength++;
                 }
             }
 
@@ -173,7 +189,7 @@ namespace TicTac
             }
 
 
-            if (fullLength == comboLength)
+            if (fullLength == comboLength - 1)
             {
                 return new Row(returnStartPoint, returnEndPoint, tempArray, comboLength);
             }

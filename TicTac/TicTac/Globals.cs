@@ -5,6 +5,10 @@ using System.Text;
 
 namespace TicTac
 {
+
+    public enum GameState { menu, playing, gameover }
+    public enum PlayerType { Human, AI }
+
     public static class Globals
     {
         public const int windowX = 1280;
@@ -15,7 +19,6 @@ namespace TicTac
         public const int gridOffsetY = 50;
 
         public static Random rand = new Random();
-
 
         public static TileState getOtherTileState(TileState state)
         {

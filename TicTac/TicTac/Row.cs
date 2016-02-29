@@ -10,7 +10,7 @@ namespace TicTac
     {
         public Point emptyTile1 { get; private set; }
         public Point emptyTile2 { get; private set; }
-        Tile[] tiles;
+        public Tile[] tiles { get; private set; }
         int length;
 
         public Row(Point emptyTile1, Point emptyTile2, Tile[] tiles, int length)

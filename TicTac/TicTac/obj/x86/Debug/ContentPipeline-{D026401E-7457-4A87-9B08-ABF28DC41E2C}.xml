@@ -10,6 +10,15 @@
       <Output>D:\SourceTree\TicTac\TicTac\TicTac\bin\x86\Debug\Content\board.xnb</Output>
       <Time>2016-02-26T23:56:56.9372142+01:00</Time>
     </Item>
+    <Item>
+      <Source>font.spritefont</Source>
+      <Name>font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\SourceTree\TicTac\TicTac\TicTac\bin\x86\Debug\Content\font.xnb</Output>
+      <Time>2016-02-29T02:51:14.7850525+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{D026401E-7457-4A87-9B08-ABF28DC41E2C}</ContentProjectGUID>

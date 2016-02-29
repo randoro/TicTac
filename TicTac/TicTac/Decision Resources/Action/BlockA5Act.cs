@@ -22,12 +22,12 @@ namespace TicTac
 
 
             //might be unbalanced
-            if (!(tempRow.emptyTile1.X == -1 && tempRow.emptyTile1.Y == -1))
+            if (tempRow.emptyTile1.X != -1 && tempRow.emptyTile1.Y != -1)
             {
                 return tempRow.emptyTile1;
             }
 
-            if (!(tempRow.emptyTile2.X == -1 && tempRow.emptyTile2.Y == -1))
+            if (tempRow.emptyTile2.X != -1 && tempRow.emptyTile2.Y != -1)
             {
                 return tempRow.emptyTile2;
             }

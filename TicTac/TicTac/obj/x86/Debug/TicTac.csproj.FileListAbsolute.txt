@@ -5,3 +5,4 @@ D:\SourceTree\TicTac\TicTac\TicTac\obj\x86\Debug\Microsoft.Xna.Framework.Runtime
 D:\SourceTree\TicTac\TicTac\TicTac\obj\x86\Debug\TicTac.exe
 D:\SourceTree\TicTac\TicTac\TicTac\obj\x86\Debug\TicTac.pdb
 D:\SourceTree\TicTac\TicTac\TicTac\bin\x86\Debug\Content\board.xnb
+D:\SourceTree\TicTac\TicTac\TicTac\bin\x86\Debug\Content\font.xnb

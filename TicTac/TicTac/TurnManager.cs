@@ -18,12 +18,35 @@ namespace TicTac
         int turnPause = 0;
         int turnPauseMax = 20;
 
-        public TurnManager(Board board)
+        public TurnManager(Board board, PlayerType newPlayer1Type, PlayerType newPlayer2Type)
         {
             this.board = board;
             players = new Player[2];
-            players[0] = new HumanPlayer(board, TileState.Omark);
-            players[1] = new AIPlayer(board, TileState.Xmark);
+
+            switch (newPlayer1Type)
+            {
+                case PlayerType.Human:
+                    players[0] = new HumanPlayer(board, TileState.Xmark);
+                    break;
+                case PlayerType.AI:
+                    players[0] = new AIPlayer(board, TileState.Xmark);
+                    break;
+                default:
+                    break;
+            }
+
+            switch (newPlayer2Type)
+            {
+                case PlayerType.Human:
+                    players[1] = new HumanPlayer(board, TileState.Omark);
+                    break;
+                case PlayerType.AI:
+                    players[1] = new AIPlayer(board, TileState.Omark);
+                    break;
+                default:
+                    break;
+            }
+            
             turn = 0;
         }
 
